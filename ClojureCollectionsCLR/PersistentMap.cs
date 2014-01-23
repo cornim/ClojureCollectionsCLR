@@ -15,9 +15,9 @@ namespace ClojureCollectionsCLR
             _clojureMap = clojure.lang.PersistentHashMap.create(new Dictionary<K, V>());
         }
 
-        public PersistentHashMap(IDictionary<K, V> map)
+        public PersistentHashMap(IDictionary<K, V> dict)
         {
-            _clojureMap = clojure.lang.PersistentHashMap.create(map);
+            _clojureMap = clojure.lang.PersistentHashMap.create(dict);
         }
 
         private PersistentHashMap(clojure.lang.IPersistentMap clojureMap)
@@ -25,23 +25,20 @@ namespace ClojureCollectionsCLR
             _clojureMap = clojureMap;
         }
 
-        public int count()
-        {
-            return _clojureMap.count();
-        }
+        public int Count { get { return _clojureMap.count(); } }
 
-        public IPersistentMap<K, V> cons(IMapEntry<K, V> entry)
+        public IPersistentMap<K, V> Cons(IMapEntry<K, V> entry)
         {
             return new PersistentHashMap<K, V>((clojure.lang.IPersistentMap)
-                            _clojureMap.cons(new clojure.lang.MapEntry(entry.key(), entry.val())));
+                            _clojureMap.cons(new clojure.lang.MapEntry(entry.Key(), entry.Val())));
         }
 
-        public IPersistentMap<K, V> empty()
+        public IPersistentMap<K, V> Empty()
         {
             return new PersistentHashMap<K, V>((clojure.lang.IPersistentMap)_clojureMap.empty());
         }
 
-        public bool equiv(IPersistentMap<K, V> map)
+        public bool Equiv(IPersistentMap<K, V> map)
         {
             if (!(map is IPersistentMap<K, V>))
             {
@@ -52,12 +49,12 @@ namespace ClojureCollectionsCLR
             return _clojureMap.equiv(cMap._clojureMap);
         }
 
-        public bool contiansKey(K key)
+        public bool ContiansKey(K key)
         {
             return _clojureMap.containsKey(key);
         }
 
-        public IMapEntry<K, V> entryAt(K key)
+        public IMapEntry<K, V> EntryAt(K key)
         {
             clojure.lang.IMapEntry clojureMapEntry = _clojureMap.entryAt(key);
             if (clojureMapEntry != null)
@@ -67,12 +64,12 @@ namespace ClojureCollectionsCLR
             return null;
         }
 
-        public V valAt(K key)
+        public V ValAt(K key)
         {
             return (V)_clojureMap.valAt(key);
         }
 
-        public V valAt(K key, V notFound)
+        public V ValAt(K key, V notFound)
         {
             if (_clojureMap.containsKey(key))
             {
@@ -81,17 +78,17 @@ namespace ClojureCollectionsCLR
             return notFound;
         }
 
-        public IPersistentMap<K, V> assoc(K key, V value)
+        public IPersistentMap<K, V> Assoc(K key, V value)
         {
             return new PersistentHashMap<K, V>(_clojureMap.assoc(key, value));
         }
 
-        public IPersistentMap<K, V> assocEx(K key, V value)
+        public IPersistentMap<K, V> AssocEx(K key, V value)
         {
             return new PersistentHashMap<K, V>(_clojureMap.assocEx(key, value));
         }
 
-        public IPersistentMap<K, V> without(K key)
+        public IPersistentMap<K, V> Without(K key)
         {
             return new PersistentHashMap<K, V>(_clojureMap.without(key));
         }

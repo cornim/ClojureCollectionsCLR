@@ -26,10 +26,7 @@ namespace ClojureCollectionsCLR
             _clojureList = clojureList;
         }
 
-        public int count()
-        {
-            return _clojureList.count();
-        }
+        public int Count { get { return _clojureList.count(); } }
 
         public IPersistentList<T> cons(T o)
         {
@@ -41,7 +38,7 @@ namespace ClojureCollectionsCLR
             return new PersistentList<T>((clojure.lang.IPersistentList)_clojureList.empty());
         }
 
-        public bool equiv(IPersistentList<T> list)
+        public bool Equiv(IPersistentList<T> list)
         {
             if (!(list is PersistentList<T>))
             {
@@ -52,17 +49,17 @@ namespace ClojureCollectionsCLR
             return _clojureList.equiv(cList._clojureList);
         }
 
-        public T peek()
+        public T Peek()
         {
             return (T)_clojureList.peek();
         }
 
-        public IPersistentList<T> pop()
+        public IPersistentList<T> Pop()
         {
             return new PersistentList<T>((clojure.lang.IPersistentList)_clojureList.pop());
         }
 
-        public IPersistentList<T> without(T item)
+        public IPersistentList<T> Without(T item)
         {
             IPersistentList<T> ret = new PersistentList<T>();
             foreach (T t in this)

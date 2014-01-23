@@ -15,7 +15,7 @@ namespace ClojureCollectionsCLR
     public interface IPersistentList<T> : IEnumerable<T>
     {
         /**Returns the number of objects currently in the list.*/
-        int count();
+        int Count { get; }
 
         /**Adds an object of type T to the List and returns it.
          *
@@ -31,13 +31,13 @@ namespace ClojureCollectionsCLR
          *
          * @param list The other list to compare with.
          * @return True if the two lists are equivalent, False otherwise.*/
-        bool equiv(IPersistentList<T> list);
+        bool Equiv(IPersistentList<T> list);
 
         /**Returns the object which was last added to the list.*/
-        T peek();
+        T Peek();
 
         /**Returns a list where the object which was added last has been removed.*/
-        IPersistentList<T> pop();
+        IPersistentList<T> Pop();
 
         /**Returns a list where the item specified has been removed.
          * If no item in the list is equal the the item specified the entire list
@@ -45,6 +45,6 @@ namespace ClojureCollectionsCLR
          *
          * @param item The item to be removed.
          * @return The list with the item specified removed. */
-        IPersistentList<T> without(T item);
+        IPersistentList<T> Without(T item);
     }
 }

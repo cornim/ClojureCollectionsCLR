@@ -25,17 +25,14 @@ namespace ClojureCollectionsCLR
             _clojureVector = clojureVector;
         }
 
-        public int count()
-        {
-            return _clojureVector.count();
-        }
+        public int Count { get { return _clojureVector.count(); } }
 
-        public IPersistentVector<T> empty()
+        public IPersistentVector<T> Empty()
         {
             return new PersistentVector<T>((clojure.lang.IPersistentVector)_clojureVector.empty());
         }
 
-        public bool equiv(IPersistentVector<T> vec)
+        public bool Equiv(IPersistentVector<T> vec)
         {
             if (!(vec is PersistentVector<T>))
             {
@@ -46,37 +43,37 @@ namespace ClojureCollectionsCLR
             return _clojureVector.equiv(cVec._clojureVector);
         }
 
-        public T peek()
+        public T Peek()
         {
             return (T)_clojureVector.peek();
         }
 
-        public IPersistentVector<T> pop()
+        public IPersistentVector<T> Pop()
         {
             return new PersistentVector<T>((clojure.lang.IPersistentVector)_clojureVector.pop());
         }
 
-        public int length()
+        public int Length()
         {
             return _clojureVector.length();
         }
 
-        public IPersistentVector<T> assocN(int i, T val)
+        public IPersistentVector<T> AssocN(int i, T val)
         {
             return new PersistentVector<T>(_clojureVector.assocN(i, val));
         }
 
-        public IPersistentVector<T> cons(T val)
+        public IPersistentVector<T> Cons(T val)
         {
             return new PersistentVector<T>(_clojureVector.cons(val));
         }
 
-        public T nth(int n)
+        public T Nth(int n)
         {
             return (T)_clojureVector.nth(n);
         }
 
-        public bool containsKey(int key)
+        public bool ContainsKey(int key)
         {
             return _clojureVector.containsKey(key);
         }
@@ -86,33 +83,33 @@ namespace ClojureCollectionsCLR
             return new MapEntry<int, T>(_clojureVector.entryAt(key));
         }
 
-        public T valAt(int key)
+        public T ValAt(int key)
         {
             return (T)_clojureVector.valAt(key);
         }
 
-        public T valAt(int key, T notFound)
+        public T ValAt(int key, T notFound)
         {
-            if (key >= 0 && key < count())
+            if (key >= 0 && key < Count)
             {
-                return nth(key);
+                return Nth(key);
             }
             return notFound;
         }
 
-        public IPersistentVector<T> subVec(int start, int end)
+        public IPersistentVector<T> SubVec(int start, int end)
         {
             return new PersistentVector<T>(clojure.lang.RT.subvec(_clojureVector, start, end));
         }
 
-        public IPersistentVector<T> without(T item)
+        public IPersistentVector<T> Without(T item)
         {
             IPersistentVector<T> ret = new PersistentVector<T>();
             foreach (T t in this)
             {
                 if (!(t.Equals(item)))
                 {
-                    ret = ret.cons(t);
+                    ret = ret.Cons(t);
                 }
             }
             return ret;

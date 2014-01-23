@@ -15,26 +15,26 @@ namespace ClojureCollectionsCLR
     public interface IPersistentVector<T> : IEnumerable<T>
     {
         /**Returns the number of objects currently in the vector.*/
-        int count();
+        int Count { get; }
 
         /**Returns the vector with all elements removed.*/
-        IPersistentVector<T> empty();
+        IPersistentVector<T> Empty();
 
         /**Checks if this vector is equivalent to another vector.
          * Equivalent means it has equal items at the same positions.
          *
          * @param vec The other vector to compare with.
          * @return True if the two vectors are equivalent, False otherwise.*/
-        bool equiv(IPersistentVector<T> vec);
+        bool Equiv(IPersistentVector<T> vec);
 
         /**Returns the object which was last added to the vector.*/
-        T peek();
+        T Peek();
 
         /**Returns a vector where the object which was added last has been removed.*/
-        IPersistentVector<T> pop();
+        IPersistentVector<T> Pop();
 
         /**Returns the number of objects currently in the vector.*/
-        int length();
+        int Length();
 
         /**Place a value at the i'th position in the vector thereby replacing
          * the value which was there before. If i was not filled before then an
@@ -43,19 +43,19 @@ namespace ClojureCollectionsCLR
          * @param i Position where the new value should be placed.
          * @param val The new value
          * @return The new vector with the replaced value. */
-        IPersistentVector<T> assocN(int i, T val);
+        IPersistentVector<T> AssocN(int i, T val);
 
         /**Adds an object of type T to the vector.
          *
          * @param o Object to be added.
          * @return New vector with the additional object added.*/
-        IPersistentVector<T> cons(T val);
+        IPersistentVector<T> Cons(T val);
 
         /**Returns the n'th element in the list.*/
-        T nth(int n);
+        T Nth(int n);
 
         /**Returns true if i is a filled element, false otherwise.*/
-        bool containsKey(int i);
+        bool ContainsKey(int i);
 
         /**Returns the the value at a given position together with the number of
          * the position.
@@ -68,19 +68,19 @@ namespace ClojureCollectionsCLR
         /**Returns the object at position i.
          *
          * @see nth        */
-        T valAt(int i);
+        T ValAt(int i);
 
         /**Returns the object at position i or notFound if i is out of bounds.*/
-        T valAt(int i, T notFound);
+        T ValAt(int i, T notFound);
 
         /**Returns a subvector of the current vector starting at start (inclusive)
          * and ending at end (exclusive). */
-        IPersistentVector<T> subVec(int start, int end);
+        IPersistentVector<T> SubVec(int start, int end);
 
         /**Returns the vector without item. If item is not in the vector
          * a copy of the entire vector is returned.
          *
          * @param item Item which is filtered from the vector.*/
-        IPersistentVector<T> without(T item);
+        IPersistentVector<T> Without(T item);
     }
 }

@@ -22,12 +22,12 @@ namespace ClojureCollectionsCLR
             _val = (V)clojureMapEntry.val();
         }
 
-        public K key()
+        public K Key()
         {
             return _key;
         }
 
-        public V val()
+        public V Val()
         {
             return _val;
         }
