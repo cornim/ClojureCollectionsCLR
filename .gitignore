@@ -1,0 +1,11 @@
+*.suo
+packages/
+Local.testsettings
+TraceAndTestImpact.testsettings
+*.vsmdi
+*.user
+TestResults/
+bin/
+obj/
+lib/
+testimpactdata.sdf
