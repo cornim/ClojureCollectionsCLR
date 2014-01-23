@@ -52,25 +52,25 @@ namespace ClojureCollectionsCLRTest
             target = target.Cons(10);
             target = target.Cons(20);
 
-            Assert.AreEqual(4, target.count());
+            Assert.AreEqual(4, target.Count);
             Assert.AreEqual(4, target.Length());
             Assert.AreEqual(20, target.Peek());
             Assert.AreEqual(5, target.Nth(1));
             Assert.AreEqual(5, target.ValAt(1));
             Assert.AreEqual(5, target.ValAt(1, 666));
             Assert.AreEqual(666, target.ValAt(5, 666));
-            Assert.AreEqual(5, target.entryAt(1).Val());
+            Assert.AreEqual(5, target.entryAt(1).Val);
             Assert.IsTrue(target.ContainsKey(2));
 
 
 
             target = target.Pop();
 
-            Assert.AreEqual(3, target.count());
+            Assert.AreEqual(3, target.Count);
             Assert.AreEqual(10, target.Peek());
 
             target = target.AssocN(1, 9);
-            Assert.AreEqual(3, target.count());
+            Assert.AreEqual(3, target.Count);
             Assert.AreEqual(9, target.Nth(1));
 
             try
@@ -90,17 +90,17 @@ namespace ClojureCollectionsCLRTest
 
             target = target.Cons(-9);
             target = target.SubVec(2, 4);
-            Assert.AreEqual(2, target.count());
+            Assert.AreEqual(2, target.Count);
             Assert.AreEqual(10, target.Nth(0));
             Assert.AreEqual(-9, target.Nth(1));
 
             target = target.Without(10);
-            Assert.AreEqual(1, target.count());
+            Assert.AreEqual(1, target.Count);
             Assert.AreEqual(-9, target.Peek());
 
             target = target.Empty();
 
-            Assert.AreEqual(0, target.count());
+            Assert.AreEqual(0, target.Count);
         }
 
         [TestMethod]
@@ -113,17 +113,17 @@ namespace ClojureCollectionsCLRTest
             target = target.Assoc("k3", "v3");
             target = target.Assoc("k4", "v4");
 
-            Assert.AreEqual(4, target.count());
+            Assert.AreEqual(4, target.Count);
             Assert.IsTrue(target.ContiansKey("k3"));
             Assert.IsFalse(target.ContiansKey("x"));
-            Assert.AreEqual("k3", target.EntryAt("k3").Key());
-            Assert.AreEqual("v3", target.EntryAt("k3").Val());
+            Assert.AreEqual("k3", target.EntryAt("k3").Key);
+            Assert.AreEqual("v3", target.EntryAt("k3").Val);
             Assert.AreEqual("v3", target.ValAt("k3"));
             Assert.AreEqual("nf", target.ValAt("x", "nf"));
 
             target = target.Assoc("k2", "vx");
 
-            Assert.AreEqual(4, target.count());
+            Assert.AreEqual(4, target.Count);
             Assert.AreEqual("vx", target.ValAt("k2"));
 
             try
@@ -136,17 +136,17 @@ namespace ClojureCollectionsCLRTest
                 //Expected exception
             }
 
-            Assert.AreEqual(4, target.count());
+            Assert.AreEqual(4, target.Count);
             Assert.AreEqual("vx", target.ValAt("k2"));
 
             target = target.Without("k3");
 
-            Assert.AreEqual(3, target.count());
+            Assert.AreEqual(3, target.Count);
             Assert.AreEqual("v4", target.ValAt("k4"));
 
             target = target.Cons(new MapEntry<String, String>("k5", "v5"));
 
-            Assert.AreEqual(4, target.count());
+            Assert.AreEqual(4, target.Count);
             Assert.AreEqual("v5", target.ValAt("k5"));
 
             Assert.IsNull(target.ValAt("x"));
@@ -155,21 +155,21 @@ namespace ClojureCollectionsCLRTest
             target = target.Assoc(null, "null");
             target = target.Assoc("null", null);
 
-            Assert.AreEqual(6, target.count());
+            Assert.AreEqual(6, target.Count);
             Assert.AreEqual("null", target.ValAt(null));
             Assert.IsNull(target.ValAt("null"));
 
             foreach (IMapEntry<String, String> mapEntry in target)
             {
-                if (mapEntry.Key() != null && mapEntry.Key().Equals("null"))
+                if (mapEntry.Key != null && mapEntry.Key.Equals("null"))
                 {
-                    Assert.IsNull(mapEntry.Val());
+                    Assert.IsNull(mapEntry.Val);
                 }
             }
 
             target = target.Empty();
 
-            Assert.AreEqual(0, target.count());
+            Assert.AreEqual(0, target.Count);
 
             target = target.Assoc("x", "y");
             target = target.Assoc("z", "a");

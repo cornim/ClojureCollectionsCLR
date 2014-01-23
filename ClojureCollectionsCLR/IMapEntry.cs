@@ -7,7 +7,7 @@ namespace ClojureCollectionsCLR
 {
     public interface IMapEntry<K, V>
     {
-        K Key();
-        V Val();
+        K Key { get; }
+        V Val { get; }
     }
 }

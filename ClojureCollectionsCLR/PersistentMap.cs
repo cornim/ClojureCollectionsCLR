@@ -30,7 +30,7 @@ namespace ClojureCollectionsCLR
         public IPersistentMap<K, V> Cons(IMapEntry<K, V> entry)
         {
             return new PersistentHashMap<K, V>((clojure.lang.IPersistentMap)
-                            _clojureMap.cons(new clojure.lang.MapEntry(entry.Key(), entry.Val())));
+                            _clojureMap.cons(new clojure.lang.MapEntry(entry.Key, entry.Val)));
         }
 
         public IPersistentMap<K, V> Empty()
