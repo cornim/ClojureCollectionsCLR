@@ -10,7 +10,6 @@ namespace ClojureCollectionsCLRTest
     [TestClass]
     public class PersistentCollectionsTest
     {
-
         [TestMethod]
         public void PersistentListTests()
         {
@@ -32,6 +31,9 @@ namespace ClojureCollectionsCLRTest
             var target2 = new PersistentList<int>(init);
 
             Assert.IsTrue(target.Equiv(target2));
+            Assert.AreEqual(target, target2);
+            Assert.AreEqual(target.GetHashCode(), target2.GetHashCode());
+            Assert.AreNotSame(target, target2);
 
             target = target.Without(1);
             Assert.AreEqual(1, target.Count());
@@ -63,7 +65,6 @@ namespace ClojureCollectionsCLRTest
             Assert.IsTrue(target.ContainsKey(2));
 
 
-
             target = target.Pop();
 
             Assert.AreEqual(3, target.Count);
@@ -87,6 +88,8 @@ namespace ClojureCollectionsCLRTest
             IPersistentVector<int> target3 = new PersistentVector<int>(new[]{3, 56, 55, 8});
 
             Assert.IsTrue(target2.Equiv(target3));
+            Assert.AreEqual(target2, target3);
+            Assert.AreEqual(target2.GetHashCode(), target3.GetHashCode());
 
             target = target.Cons(-9);
             target = target.SubVec(2, 4);
@@ -180,11 +183,14 @@ namespace ClojureCollectionsCLRTest
             target2 = target2.Assoc("z", "a");
 
             Assert.IsTrue(target.Equiv(target2));
+            Assert.AreEqual(target, target2);
+            Assert.AreEqual(target.GetHashCode(), target2.GetHashCode());
 
             target2 = target2.Without("z");
             target2 = target2.Without("b");
 
             Assert.IsFalse(target.Equiv(target2));
+            Assert.AreNotEqual(target, target2);
         }
     }
 }

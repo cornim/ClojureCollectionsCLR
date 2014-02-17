@@ -124,5 +124,23 @@ namespace ClojureCollectionsCLR
         {
             return GetEnumerator();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is IPersistentVector<T>)
+                return Equiv(obj as IPersistentVector<T>);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return _clojureVector.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return _clojureVector.ToString();
+        }
     }
 }

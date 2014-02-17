@@ -138,5 +138,23 @@ namespace ClojureCollectionsCLR
                 _enumerator.Reset();
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is IPersistentMap<K, V>)
+                return Equiv(obj as IPersistentMap<K, V>);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return _clojureMap.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return _clojureMap.ToString();
+        }
     }
 }

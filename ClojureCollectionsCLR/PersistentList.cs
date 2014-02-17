@@ -81,5 +81,23 @@ namespace ClojureCollectionsCLR
         {
             return GetEnumerator();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is IPersistentList<T>)
+                return Equiv(obj as IPersistentList<T>);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return _clojureList.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return _clojureList.ToString();
+        }
     }
 }
