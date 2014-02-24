@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ClojureCollectionsCLR
+﻿namespace ClojureCollectionsCLR
 {
-    public interface IMapEntry<K, V>
+    public interface IMapEntry<out TK, out TV>
     {
-        K Key { get; }
-        V Val { get; }
+        TK Key { get; }
+        TV Val { get; }
     }
 }

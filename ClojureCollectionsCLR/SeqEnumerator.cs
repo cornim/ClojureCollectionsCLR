@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections;
 
 namespace ClojureCollectionsCLR
 {
     class SeqEnumerator<T> : IEnumerator<T>
     {
-        private clojure.lang.SeqEnumerator _clojureEnumerator;
+        private readonly clojure.lang.SeqEnumerator _clojureEnumerator;
 
         public SeqEnumerator(clojure.lang.SeqEnumerator clojureEnumerator)
         {

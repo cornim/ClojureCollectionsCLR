@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections;
 
 namespace ClojureCollectionsCLR
 {
-    public class PersistentHashMap<K, V> : IPersistentMap<K, V>
+    public class PersistentHashMap<TK, TV> : IPersistentMap<TK, TV>
     {
         private readonly clojure.lang.IPersistentMap _clojureMap;
 
         public PersistentHashMap()
         {
-            _clojureMap = clojure.lang.PersistentHashMap.create(new Dictionary<K, V>());
+            _clojureMap = clojure.lang.PersistentHashMap.create(new Dictionary<TK, TV>());
         }
 
-        public PersistentHashMap(IDictionary<K, V> dict)
+        public PersistentHashMap(IDictionary<TK, TV> dict)
         {
             _clojureMap = clojure.lang.PersistentHashMap.create(dict as IDictionary);
         }
@@ -27,74 +24,74 @@ namespace ClojureCollectionsCLR
 
         public int Count { get { return _clojureMap.count(); } }
 
-        public IPersistentMap<K, V> Cons(IMapEntry<K, V> entry)
+        public IPersistentMap<TK, TV> Cons(IMapEntry<TK, TV> entry)
         {
-            return new PersistentHashMap<K, V>((clojure.lang.IPersistentMap)
+            return new PersistentHashMap<TK, TV>(
                             _clojureMap.cons(new clojure.lang.MapEntry(entry.Key, entry.Val)));
         }
 
-        public IPersistentMap<K, V> Empty()
+        public IPersistentMap<TK, TV> Empty()
         {
-            return new PersistentHashMap<K, V>((clojure.lang.IPersistentMap)_clojureMap.empty());
+            return new PersistentHashMap<TK, TV>((clojure.lang.IPersistentMap)_clojureMap.empty());
         }
 
-        public bool Equiv(IPersistentMap<K, V> map)
+        public bool Equiv(IPersistentMap<TK, TV> map)
         {
-            if (!(map is IPersistentMap<K, V>))
-            {
+            if (map == null)
                 return false;
-            }
 
-            PersistentHashMap<K, V> cMap = map as PersistentHashMap<K, V>;
+            var cMap = map as PersistentHashMap<TK, TV>;
+            if (cMap == null)
+                return false;
             return _clojureMap.equiv(cMap._clojureMap);
         }
 
-        public bool ContiansKey(K key)
+        public bool ContiansKey(TK key)
         {
             return _clojureMap.containsKey(key);
         }
 
-        public IMapEntry<K, V> EntryAt(K key)
+        public IMapEntry<TK, TV> EntryAt(TK key)
         {
             clojure.lang.IMapEntry clojureMapEntry = _clojureMap.entryAt(key);
             if (clojureMapEntry != null)
             {
-                return new MapEntry<K, V>(clojureMapEntry);
+                return new MapEntry<TK, TV>(clojureMapEntry);
             }
             return null;
         }
 
-        public V ValAt(K key)
+        public TV ValAt(TK key)
         {
-            return (V)_clojureMap.valAt(key);
+            return (TV)_clojureMap.valAt(key);
         }
 
-        public V ValAt(K key, V notFound)
+        public TV ValAt(TK key, TV notFound)
         {
             if (_clojureMap.containsKey(key))
             {
-                return (V)_clojureMap.valAt(key);
+                return (TV)_clojureMap.valAt(key);
             }
             return notFound;
         }
 
-        public IPersistentMap<K, V> Assoc(K key, V value)
+        public IPersistentMap<TK, TV> Assoc(TK key, TV value)
         {
-            return new PersistentHashMap<K, V>(_clojureMap.assoc(key, value));
+            return new PersistentHashMap<TK, TV>(_clojureMap.assoc(key, value));
         }
 
-        public IPersistentMap<K, V> AssocEx(K key, V value)
+        public IPersistentMap<TK, TV> AssocEx(TK key, TV value)
         {
-            return new PersistentHashMap<K, V>(_clojureMap.assocEx(key, value));
+            return new PersistentHashMap<TK, TV>(_clojureMap.assocEx(key, value));
         }
 
-        public IPersistentMap<K, V> Without(K key)
+        public IPersistentMap<TK, TV> Without(TK key)
         {
-            return new PersistentHashMap<K, V>(_clojureMap.without(key));
+            return new PersistentHashMap<TK, TV>(_clojureMap.without(key));
         }
 
 
-        public IEnumerator<IMapEntry<K, V>> GetEnumerator()
+        public IEnumerator<IMapEntry<TK, TV>> GetEnumerator()
         {
             return new MapEntryEnumerator(_clojureMap.GetEnumerator());
         }
@@ -104,18 +101,18 @@ namespace ClojureCollectionsCLR
             return GetEnumerator();
         }
 
-        private class MapEntryEnumerator : IEnumerator<IMapEntry<K, V>>
+        private class MapEntryEnumerator : IEnumerator<IMapEntry<TK, TV>>
         {
-            IEnumerator<clojure.lang.IMapEntry> _enumerator;
+            private readonly IEnumerator<clojure.lang.IMapEntry> _enumerator;
 
             public MapEntryEnumerator(IEnumerator<clojure.lang.IMapEntry> enumerator)
             {
                 _enumerator = enumerator;
             }
 
-            public IMapEntry<K, V> Current
+            public IMapEntry<TK, TV> Current
             {
-                get { return new MapEntry<K, V>(_enumerator.Current); }
+                get { return new MapEntry<TK, TV>(_enumerator.Current); }
             }
 
             public void Dispose()
@@ -141,8 +138,8 @@ namespace ClojureCollectionsCLR
 
         public override bool Equals(object obj)
         {
-            if (obj is IPersistentMap<K, V>)
-                return Equiv(obj as IPersistentMap<K, V>);
+            if (obj is IPersistentMap<TK, TV>)
+                return Equiv(obj as IPersistentMap<TK, TV>);
 
             return false;
         }

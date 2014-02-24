@@ -9,3 +9,4 @@ bin/
 obj/
 lib/
 testimpactdata.sdf
+_ReSharper.ClojureCollectionsCLR/

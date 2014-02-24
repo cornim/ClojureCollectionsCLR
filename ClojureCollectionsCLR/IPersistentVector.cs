@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ClojureCollectionsCLR
 {
@@ -63,7 +60,7 @@ namespace ClojureCollectionsCLR
          * @param i Number of the position to retrieve.
          * @return A MapEntry consisting of the the position i as key and the value
          * at position i as val. */
-        IMapEntry<int, T> entryAt(int i);
+        IMapEntry<int, T> EntryAt(int i);
 
         /**Returns the object at position i.
          *

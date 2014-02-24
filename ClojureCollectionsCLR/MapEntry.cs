@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ClojureCollectionsCLR
+﻿namespace ClojureCollectionsCLR
 {
-    public class MapEntry<K, V> : IMapEntry<K, V>
+    public class MapEntry<TK, TV> : IMapEntry<TK, TV>
     {
-        private readonly K _key;
-        private readonly V _val;
+        private readonly TK _key;
+        private readonly TV _val;
 
-        public MapEntry(K key, V val)
+        public MapEntry(TK key, TV val)
         {
             _key = key;
             _val = val;
@@ -18,13 +13,13 @@ namespace ClojureCollectionsCLR
 
         internal MapEntry(clojure.lang.IMapEntry clojureMapEntry)
         {
-            _key = (K)clojureMapEntry.key();
-            _val = (V)clojureMapEntry.val();
+            _key = (TK)clojureMapEntry.key();
+            _val = (TV)clojureMapEntry.val();
         }
 
-        public K Key { get { return _key; } }
+        public TK Key { get { return _key; } }
 
-        public V Val { get { return _val; } }
+        public TV Val { get { return _val; } }
 
     }
 }

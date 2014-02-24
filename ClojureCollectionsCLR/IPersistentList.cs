@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ClojureCollectionsCLR
 {
@@ -21,10 +18,10 @@ namespace ClojureCollectionsCLR
          *
          * @param o Object to be added.
          * @return New list with the additional object added.*/
-        IPersistentList<T> cons(T o);
+        IPersistentList<T> Cons(T o);
 
         /**Returns the list with all elements removed.*/
-        IPersistentList<T> empty();
+        IPersistentList<T> Empty();
 
         /**Checks if this list is equivalent to another list.
          * Equivalent means it has equal items at the same positions.

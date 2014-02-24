@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using ClojureCollectionsCLR;
@@ -14,9 +13,9 @@ namespace ClojureCollectionsCLRTest
         public void PersistentListTests()
         {
             IPersistentList<int> target = new PersistentList<int>();
-            target = target.cons(1);
-            target = target.cons(5);
-            target = target.cons(10);
+            target = target.Cons(1);
+            target = target.Cons(5);
+            target = target.Cons(10);
 
             Assert.AreEqual(3, target.Count());
             Assert.AreEqual(10, target.Peek());
@@ -39,7 +38,7 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual(1, target.Count());
             Assert.AreEqual(5, target.Peek());
 
-            target = target.empty();
+            target = target.Empty();
 
             Assert.AreEqual(0, target.Count());
         }
@@ -61,7 +60,7 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual(5, target.ValAt(1));
             Assert.AreEqual(5, target.ValAt(1, 666));
             Assert.AreEqual(666, target.ValAt(5, 666));
-            Assert.AreEqual(5, target.entryAt(1).Val);
+            Assert.AreEqual(5, target.EntryAt(1).Val);
             Assert.IsTrue(target.ContainsKey(2));
 
 

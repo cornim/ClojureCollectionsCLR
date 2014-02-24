@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace ClojureCollectionsCLR
 {
@@ -34,12 +32,10 @@ namespace ClojureCollectionsCLR
 
         public bool Equiv(IPersistentVector<T> vec)
         {
-            if (!(vec is PersistentVector<T>))
-            {
+            var cVec = vec as PersistentVector<T>;
+            if (cVec == null)
                 return false;
-            }
 
-            PersistentVector<T> cVec = (PersistentVector<T>)vec;
             return _clojureVector.equiv(cVec._clojureVector);
         }
 
@@ -78,7 +74,7 @@ namespace ClojureCollectionsCLR
             return _clojureVector.containsKey(key);
         }
 
-        public IMapEntry<int, T> entryAt(int key)
+        public IMapEntry<int, T> EntryAt(int key)
         {
             return new MapEntry<int, T>(_clojureVector.entryAt(key));
         }
@@ -105,13 +101,7 @@ namespace ClojureCollectionsCLR
         public IPersistentVector<T> Without(T item)
         {
             IPersistentVector<T> ret = new PersistentVector<T>();
-            foreach (T t in this)
-            {
-                if (!(t.Equals(item)))
-                {
-                    ret = ret.Cons(t);
-                }
-            }
+            ret = this.Where(t => !(t.Equals(item))).Aggregate(ret, (current, t) => current.Cons(t));
             return ret;
         }
 

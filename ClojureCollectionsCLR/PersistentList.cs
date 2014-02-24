@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace ClojureCollectionsCLR
 {
@@ -28,24 +26,22 @@ namespace ClojureCollectionsCLR
 
         public int Count { get { return _clojureList.count(); } }
 
-        public IPersistentList<T> cons(T o)
+        public IPersistentList<T> Cons(T o)
         {
             return new PersistentList<T>((clojure.lang.IPersistentList)_clojureList.cons(o));
         }
 
-        public IPersistentList<T> empty()
+        public IPersistentList<T> Empty()
         {
             return new PersistentList<T>((clojure.lang.IPersistentList)_clojureList.empty());
         }
 
         public bool Equiv(IPersistentList<T> list)
         {
-            if (!(list is PersistentList<T>))
-            {
+            var cList = list as PersistentList<T>;
+            if (cList == null)
                 return false;
-            }
 
-            PersistentList<T> cList = (PersistentList<T>)list;
             return _clojureList.equiv(cList._clojureList);
         }
 
@@ -62,13 +58,9 @@ namespace ClojureCollectionsCLR
         public IPersistentList<T> Without(T item)
         {
             IPersistentList<T> ret = new PersistentList<T>();
-            foreach (T t in this)
-            {
-                if (!(t.Equals(item)))
-                {
-                    ret = ret.cons(t);
-                }
-            }
+
+            ret = this.Where(t => !(t.Equals(item))).Aggregate(ret, (current, t) => current.Cons(t));
+
             return ret;
         }
 
