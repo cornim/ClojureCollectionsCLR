@@ -192,5 +192,18 @@ namespace ClojureCollectionsCLRTest
             Assert.IsFalse(target.Equiv(target2));
             Assert.AreNotEqual(target, target2);
         }
+
+        [TestMethod]
+        public void CreatePersistentHashMapFromDictonary()
+        {
+            var dict = new Dictionary<Int32, Int32>();
+            dict[1] = 1;
+            dict[3] = 3;
+
+            var target = new PersistentHashMap<Int32, Int32>(dict);
+
+            Assert.AreEqual(1, target.ValAt(1));
+            Assert.AreEqual(3, target.ValAt(3));
+        }
     }
 }

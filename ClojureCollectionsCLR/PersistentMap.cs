@@ -17,7 +17,7 @@ namespace ClojureCollectionsCLR
 
         public PersistentHashMap(IDictionary<K, V> dict)
         {
-            _clojureMap = clojure.lang.PersistentHashMap.create(dict);
+            _clojureMap = clojure.lang.PersistentHashMap.create(dict as IDictionary);
         }
 
         private PersistentHashMap(clojure.lang.IPersistentMap clojureMap)
