@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ClojureCollectionsCLRTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("***REMOVED*** Group")]
+[assembly: AssemblyCompany("d-fine")]
 [assembly: AssemblyProduct("ClojureCollectionsCLRTest")]
-[assembly: AssemblyCopyright("Copyright © ***REMOVED*** Group 2014")]
+[assembly: AssemblyCopyright("Copyright 2014 Dr. Cornelius Mund. This work is published under the Eclipse Public License.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

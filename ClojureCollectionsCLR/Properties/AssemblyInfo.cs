@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ClojureCollectionsCLR")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Convenient wrapper around clojure's persistent collections using generics.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("***REMOVED*** Group")]
+[assembly: AssemblyCompany("Dr. Cornelius Mund")]
 [assembly: AssemblyProduct("ClojureCollectionsCLR")]
-[assembly: AssemblyCopyright("Copyright © ***REMOVED*** Group 2014")]
+[assembly: AssemblyCopyright("Copyright 2014 Dr. Cornelius Mund. This work is published under the Eclipse Public License.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.0")]
+[assembly: AssemblyFileVersion("0.1.0")]
