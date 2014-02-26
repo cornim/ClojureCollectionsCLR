@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.eclipse.org/legal/epl-v10.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2014 Dr. Cornelius Mund. Licensed under EPL.</copyright>
+    <tags></tags>
+    <dependencies>
+        <dependency id="Clojure" version="1.5.0.2" />
+    </dependencies>
+  </metadata>
+</package>

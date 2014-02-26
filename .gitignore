@@ -1,4 +1,5 @@
 *.suo
+*.nupkg
 packages/
 Local.testsettings
 TraceAndTestImpact.testsettings
