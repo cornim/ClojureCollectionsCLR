@@ -7,9 +7,10 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://www.eclipse.org/legal/epl-v10.html</licenseUrl>
+    <projectUrl>https://github.com/cornim/ClojureCollectionsCLR</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Corrected a typo in PersistentMap.</releaseNotes>
     <copyright>Copyright 2014 Dr. Cornelius Mund. Licensed under EPL.</copyright>
     <tags></tags>
     <dependencies>
