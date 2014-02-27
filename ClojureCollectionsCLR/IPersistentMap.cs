@@ -34,7 +34,7 @@ namespace ClojureCollectionsCLR
         bool Equiv(IPersistentMap<TK, TV> map);
 
         /**Contains true if the map contains key as a key, false otherwise.*/
-        bool ContiansKey(TK key);
+        bool ContainsKey(TK key);
 
         /**Returns the map entry for key or null if key is not found in the map.*/
         IMapEntry<TK, TV> EntryAt(TK key);

@@ -46,7 +46,7 @@ namespace ClojureCollectionsCLR
             return _clojureMap.equiv(cMap._clojureMap);
         }
 
-        public bool ContiansKey(TK key)
+        public bool ContainsKey(TK key)
         {
             return _clojureMap.containsKey(key);
         }

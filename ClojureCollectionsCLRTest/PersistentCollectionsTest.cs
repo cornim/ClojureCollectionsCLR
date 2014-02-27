@@ -116,8 +116,8 @@ namespace ClojureCollectionsCLRTest
             target = target.Assoc("k4", "v4");
 
             Assert.AreEqual(4, target.Count);
-            Assert.IsTrue(target.ContiansKey("k3"));
-            Assert.IsFalse(target.ContiansKey("x"));
+            Assert.IsTrue(target.ContainsKey("k3"));
+            Assert.IsFalse(target.ContainsKey("x"));
             Assert.AreEqual("k3", target.EntryAt("k3").Key);
             Assert.AreEqual("v3", target.EntryAt("k3").Val);
             Assert.AreEqual("v3", target.ValAt("k3"));
