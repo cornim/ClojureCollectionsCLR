@@ -113,5 +113,25 @@ namespace ClojureCollectionsCLRTest
             Assert.IsNull(target.ValAt(0));
             Assert.IsNull(target.Nth(0));
         }
+
+
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PeekOnEmptyVector()
+        {
+            IPersistentVector<int> target = new PersistentVector<int>();
+
+            target.Peek();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PopOnEmptyVector()
+        {
+            IPersistentVector<int> target = new PersistentVector<int>();
+
+            target.Pop();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ClojureCollectionsCLR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -39,6 +40,24 @@ namespace ClojureCollectionsCLRTest
             target = target.Empty();
 
             Assert.AreEqual(0, target.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PeekOnEmptyList()
+        {
+            IPersistentList<int> target = new PersistentList<int>();
+
+            target.Peek();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PopOnEmptyList()
+        {
+            IPersistentList<int> target = new PersistentList<int>();
+
+            target.Pop();
         }
     }
 }

@@ -42,7 +42,10 @@ namespace ClojureCollectionsCLR
 
         public T Peek()
         {
-            return (T)_clojureVector.peek();
+            if (Count > 0)
+                return (T)_clojureVector.peek();
+
+            throw new InvalidOperationException("Can't peek on empty vector.");
         }
 
         public IPersistentVector<T> Pop()

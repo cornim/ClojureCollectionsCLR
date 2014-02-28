@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
@@ -47,7 +48,10 @@ namespace ClojureCollectionsCLR
 
         public T Peek()
         {
-            return (T)_clojureList.peek();
+            if (Count > 0)
+                return (T)_clojureList.peek();
+
+            throw new InvalidOperationException("Can't peek on empty list.");
         }
 
         public IPersistentList<T> Pop()
