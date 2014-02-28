@@ -17,7 +17,7 @@ v.0.2
 - Replaced IMapEntry with KeyValuePair
 - Fixed bugs where functions would return a value from a map or a vector from a
   position which doesn't exist. Since structs and primitive types can be used as
-  generics null cannot be returned in these cases. No an exception is thrown.
+  generics null cannot be returned in these cases. Now an exception is thrown.
 - Fixed bugs todo with peeping and poping empty lists/vectors. An exception is
   thrown in these cases now.
 - Updated the documentation to C# style comments so it shows up in visual studio.
