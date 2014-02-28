@@ -9,6 +9,7 @@ namespace ClojureCollectionsCLRTest
     [TestClass]
     public class PersistentCollectionsTest
     {
+        #region PersistentList
         [TestMethod]
         public void PersistentListTests()
         {
@@ -42,7 +43,9 @@ namespace ClojureCollectionsCLRTest
 
             Assert.AreEqual(0, target.Count());
         }
+        #endregion
 
+        #region PersistentVector
         [TestMethod]
         public void PersistentVectorTests()
         {
@@ -60,7 +63,7 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual(5, target.ValAt(1));
             Assert.AreEqual(5, target.ValAt(1, 666));
             Assert.AreEqual(666, target.ValAt(5, 666));
-            Assert.AreEqual(5, target.EntryAt(1).Val);
+            Assert.AreEqual(5, target.EntryAt(1).Value);
             Assert.IsTrue(target.ContainsKey(2));
 
 
@@ -106,6 +109,52 @@ namespace ClojureCollectionsCLRTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TryToGetNonExistentValueForPrimitiveTypeViaValAt()
+        {
+            IPersistentVector<int> target = new PersistentVector<int>();
+            target = target.Cons(1);
+            target = target.Cons(2);
+
+            target.ValAt(25);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TryToGetNonExistendValueViaNth()
+        {
+            IPersistentVector<int> target = new PersistentVector<int>();
+            target = target.Cons(1);
+            target = target.Cons(2);
+
+            target.Nth(25);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void TryToGetNonExistendValueViaEntryAt()
+        {
+            IPersistentVector<int> target = new PersistentVector<int>();
+            target = target.Cons(1);
+            target = target.Cons(2);
+
+            target.EntryAt(25);
+        }
+
+        [TestMethod]
+        public void StoringNullInAVector()
+        {
+            IPersistentVector<string> target = new PersistentVector<string>();
+
+            target = target.Cons(null);
+
+            Assert.IsNull(target.ValAt(0));
+            Assert.IsNull(target.Nth(0));
+        }
+        #endregion
+
+        #region PersistentMap
+        [TestMethod]
         public void PersistentMapTests()
         {
             IPersistentMap<String, String> target = new PersistentHashMap<String, String>();
@@ -119,7 +168,7 @@ namespace ClojureCollectionsCLRTest
             Assert.IsTrue(target.ContainsKey("k3"));
             Assert.IsFalse(target.ContainsKey("x"));
             Assert.AreEqual("k3", target.EntryAt("k3").Key);
-            Assert.AreEqual("v3", target.EntryAt("k3").Val);
+            Assert.AreEqual("v3", target.EntryAt("k3").Value);
             Assert.AreEqual("v3", target.ValAt("k3"));
             Assert.AreEqual("nf", target.ValAt("x", "nf"));
 
@@ -146,13 +195,10 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual(3, target.Count);
             Assert.AreEqual("v4", target.ValAt("k4"));
 
-            target = target.Cons(new MapEntry<String, String>("k5", "v5"));
+            target = target.Cons(new KeyValuePair<string, string>("k5", "v5"));
 
             Assert.AreEqual(4, target.Count);
             Assert.AreEqual("v5", target.ValAt("k5"));
-
-            Assert.IsNull(target.ValAt("x"));
-            Assert.IsNull(target.EntryAt("x"));
 
             target = target.Assoc(null, "null");
             target = target.Assoc("null", null);
@@ -161,11 +207,11 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual("null", target.ValAt(null));
             Assert.IsNull(target.ValAt("null"));
 
-            foreach (IMapEntry<String, String> mapEntry in target)
+            foreach (KeyValuePair<string, string> mapEntry in target)
             {
                 if (mapEntry.Key != null && mapEntry.Key.Equals("null"))
                 {
-                    Assert.IsNull(mapEntry.Val);
+                    Assert.IsNull(mapEntry.Value);
                 }
             }
 
@@ -204,5 +250,46 @@ namespace ClojureCollectionsCLRTest
             Assert.AreEqual(1, target.ValAt(1));
             Assert.AreEqual(3, target.ValAt(3));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void RetriveValueWithUnknownKeyViaEntryAt()
+        {
+            IPersistentMap<string, string> target = new PersistentHashMap<string, string>();
+            target = target.Assoc("a", "b");
+
+            target.EntryAt("x");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void RetriveValueWithUnknownKeyViaValAt()
+        {
+            IPersistentMap<string, string> target = new PersistentHashMap<string, string>();
+            target = target.Assoc("a", "b");
+
+            target.ValAt("x");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void RetriveValueWithUnknownKeyForPrimitiveTypesViaEntryAt()
+        {
+            IPersistentMap<int, int> target = new PersistentHashMap<int, int>();
+            target = target.Assoc(1, 2);
+
+            target.EntryAt(3);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void RetriveValueWithUnknownKeyForPrimitiveTypesViaValAt()
+        {
+            IPersistentMap<int, int> target = new PersistentHashMap<int, int>();
+            target = target.Assoc(1, 2);
+
+            target.ValAt(3);
+        }
+        #endregion
     }
 }

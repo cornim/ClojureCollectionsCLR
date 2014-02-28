@@ -11,7 +11,7 @@ namespace ClojureCollectionsCLR
     * @param <K> Key type
     * @param <V> Value type
     */
-    public interface IPersistentMap<TK, TV> : IEnumerable<IMapEntry<TK, TV>>
+    public interface IPersistentMap<TK, TV> : IEnumerable<KeyValuePair<TK, TV>>
     {
         /**Returns the number of objects currently in the map.*/
         int Count { get; }
@@ -20,7 +20,7 @@ namespace ClojureCollectionsCLR
          *
          * @param entry MapEntry to be added to the map.
          * @return New map with the additional MapEntry added.*/
-        IPersistentMap<TK, TV> Cons(IMapEntry<TK, TV> entry);
+        IPersistentMap<TK, TV> Cons(KeyValuePair<TK, TV> entry);
 
         /**Returns the map with all elements removed.*/
         IPersistentMap<TK, TV> Empty();
@@ -36,10 +36,12 @@ namespace ClojureCollectionsCLR
         /**Contains true if the map contains key as a key, false otherwise.*/
         bool ContainsKey(TK key);
 
-        /**Returns the map entry for key or null if key is not found in the map.*/
-        IMapEntry<TK, TV> EntryAt(TK key);
+        /**Returns the map entry for key or throws a KeyNotFoundException if key
+         * is not found in the map.*/
+        KeyValuePair<TK, TV> EntryAt(TK key);
 
-        /**Returns the value for key or null if key is not found in the map.*/
+        /**Returns the value for key or throws a KeyNotFound exception if the key
+         * is not found in the map.*/
         TV ValAt(TK key);
 
         /**Returns the value for key or notFound if key is not found in the map.
@@ -53,8 +55,10 @@ namespace ClojureCollectionsCLR
          * value is overwritten.*/
         IPersistentMap<TK, TV> Assoc(TK key, TV value);
 
-        /**Returns a new PersistentMap where the key value pair is added to the
-         * current map. If key was already present in the map an Exception is thrown.*/
+        /// <summary>
+        /// Returns a new PersistentMap where the key value pair is added to the
+        /// current map. If key was already present in the map an Exception is thrown.
+        /// </summary>
         IPersistentMap<TK, TV> AssocEx(TK key, TV value);
 
         /**Returns the current map without key and the corresponding value. If key

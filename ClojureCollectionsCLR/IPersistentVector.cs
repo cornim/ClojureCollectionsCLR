@@ -48,7 +48,8 @@ namespace ClojureCollectionsCLR
          * @return New vector with the additional object added.*/
         IPersistentVector<T> Cons(T val);
 
-        /**Returns the n'th element in the list.*/
+        /**Returns the n'th element in the list. Throws an ArgumentOutOfRange
+         * exception if there is no object at position n.*/
         T Nth(int n);
 
         /**Returns true if i is a filled element, false otherwise.*/
@@ -60,9 +61,10 @@ namespace ClojureCollectionsCLR
          * @param i Number of the position to retrieve.
          * @return A MapEntry consisting of the the position i as key and the value
          * at position i as val. */
-        IMapEntry<int, T> EntryAt(int i);
+        KeyValuePair<int, T> EntryAt(int i);
 
-        /**Returns the object at position i.
+        /**Returns the object at position i. Throws an IndexOutOfRange
+         * exception if there is no object at position i.
          *
          * @see nth        */
         T ValAt(int i);

@@ -24,10 +24,10 @@ namespace ClojureCollectionsCLR
 
         public int Count { get { return _clojureMap.count(); } }
 
-        public IPersistentMap<TK, TV> Cons(IMapEntry<TK, TV> entry)
+        public IPersistentMap<TK, TV> Cons(KeyValuePair<TK, TV> entry)
         {
             return new PersistentHashMap<TK, TV>(
-                            _clojureMap.cons(new clojure.lang.MapEntry(entry.Key, entry.Val)));
+                            _clojureMap.cons(new clojure.lang.MapEntry(entry.Key, entry.Value)));
         }
 
         public IPersistentMap<TK, TV> Empty()
@@ -51,19 +51,22 @@ namespace ClojureCollectionsCLR
             return _clojureMap.containsKey(key);
         }
 
-        public IMapEntry<TK, TV> EntryAt(TK key)
+        public KeyValuePair<TK, TV> EntryAt(TK key)
         {
-            clojure.lang.IMapEntry clojureMapEntry = _clojureMap.entryAt(key);
-            if (clojureMapEntry != null)
+            if (ContainsKey(key))
             {
-                return new MapEntry<TK, TV>(clojureMapEntry);
+                clojure.lang.IMapEntry clojureMapEntry = _clojureMap.entryAt(key);
+                return new KeyValuePair<TK, TV>((TK) clojureMapEntry.key(), (TV) clojureMapEntry.val());
             }
-            return null;
+            throw new KeyNotFoundException(string.Format("Key {0} was not found.", key));
         }
 
         public TV ValAt(TK key)
         {
-            return (TV)_clojureMap.valAt(key);
+            if (ContainsKey(key))
+                return (TV)_clojureMap.valAt(key);
+
+            throw new KeyNotFoundException(string.Format("Key {0} was not found.", key));
         }
 
         public TV ValAt(TK key, TV notFound)
@@ -91,9 +94,9 @@ namespace ClojureCollectionsCLR
         }
 
 
-        public IEnumerator<IMapEntry<TK, TV>> GetEnumerator()
+        public IEnumerator<KeyValuePair<TK, TV>> GetEnumerator()
         {
-            return new MapEntryEnumerator(_clojureMap.GetEnumerator());
+            return new KeyValueEnumerator(_clojureMap.GetEnumerator());
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -101,18 +104,18 @@ namespace ClojureCollectionsCLR
             return GetEnumerator();
         }
 
-        private class MapEntryEnumerator : IEnumerator<IMapEntry<TK, TV>>
+        private class KeyValueEnumerator : IEnumerator<KeyValuePair<TK, TV>>
         {
             private readonly IEnumerator<clojure.lang.IMapEntry> _enumerator;
 
-            public MapEntryEnumerator(IEnumerator<clojure.lang.IMapEntry> enumerator)
+            public KeyValueEnumerator(IEnumerator<clojure.lang.IMapEntry> enumerator)
             {
                 _enumerator = enumerator;
             }
 
-            public IMapEntry<TK, TV> Current
+            public KeyValuePair<TK, TV> Current
             {
-                get { return new MapEntry<TK, TV>(_enumerator.Current); }
+                get { return new KeyValuePair<TK, TV>((TK) _enumerator.Current.key(), (TV) _enumerator.Current.val()); }
             }
 
             public void Dispose()

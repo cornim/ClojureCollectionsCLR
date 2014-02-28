@@ -49,11 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMapEntry.cs" />
     <Compile Include="IPersistentList.cs" />
     <Compile Include="IPersistentMap.cs" />
     <Compile Include="IPersistentVector.cs" />
-    <Compile Include="MapEntry.cs" />
     <Compile Include="PersistentList.cs" />
     <Compile Include="PersistentMap.cs" />
     <Compile Include="PersistentVector.cs" />

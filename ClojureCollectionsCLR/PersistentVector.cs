@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
@@ -66,7 +67,7 @@ namespace ClojureCollectionsCLR
 
         public T Nth(int n)
         {
-            return (T)_clojureVector.nth(n);
+            return (T) _clojureVector.nth(n);
         }
 
         public bool ContainsKey(int key)
@@ -74,22 +75,25 @@ namespace ClojureCollectionsCLR
             return _clojureVector.containsKey(key);
         }
 
-        public IMapEntry<int, T> EntryAt(int key)
+        public KeyValuePair<int, T> EntryAt(int key)
         {
-            return new MapEntry<int, T>(_clojureVector.entryAt(key));
+            clojure.lang.IMapEntry entry = _clojureVector.entryAt((key));
+            if (key >= 0 && key < Count)
+                return new KeyValuePair<int, T>((int) entry.key(), (T) entry.val());
+            throw new KeyNotFoundException(string.Format("Key {0} was not found.", key));
         }
 
         public T ValAt(int key)
         {
-            return (T)_clojureVector.valAt(key);
+            if (key >= 0 && key < Count)
+                return Nth(key);
+            throw new IndexOutOfRangeException();
         }
 
         public T ValAt(int key, T notFound)
         {
             if (key >= 0 && key < Count)
-            {
                 return Nth(key);
-            }
             return notFound;
         }
 
