@@ -45,8 +45,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersistentMapTest.cs" />
+    <Compile Include="PersistentVectorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PersistentCollectionsTest.cs" />
+    <Compile Include="PersistentListTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClojureCollectionsCLR\ClojureCollectionsCLR.csproj">
