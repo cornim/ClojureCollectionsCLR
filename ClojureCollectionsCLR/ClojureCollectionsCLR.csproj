@@ -31,14 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Clojure">
-      <HintPath>..\packages\Clojure.1.5.0.2\lib\net40\Clojure.dll</HintPath>
+    <Reference Include="Clojure, Version=1.5.0.0, Culture=neutral, PublicKeyToken=cf3caecd327a2fa9, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Clojure.1.5.0.2\lib\net40\Clojure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamic">
-      <HintPath>..\packages\Clojure.1.5.0.2\lib\net40\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Clojure.1.5.0.2\lib\net40\Microsoft.Dynamic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting">
-      <HintPath>..\packages\Clojure.1.5.0.2\lib\net40\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Clojure.1.5.0.2\lib\net40\Microsoft.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
