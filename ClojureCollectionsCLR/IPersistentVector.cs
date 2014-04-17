@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ClojureCollectionsCLR
 {
@@ -27,6 +28,7 @@ namespace ClojureCollectionsCLR
         /// </summary>
         /// <param name="vec">The other vector to compare with.</param>
         /// <returns>True if the two vectors are equivalent, False otherwise.</returns>
+        [Obsolete("Use regular equals instead.")]
         bool Equiv(IPersistentVector<T> vec);
 
         /// <summary>

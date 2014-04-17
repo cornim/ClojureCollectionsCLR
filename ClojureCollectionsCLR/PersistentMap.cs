@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections;
 
 namespace ClojureCollectionsCLR
 {
-    public class PersistentHashMap<TK, TV> : IPersistentMap<TK, TV>
+    [Serializable]
+    public class PersistentHashMap<TK, TV> : ImmutableObject<PersistentHashMap<TK, TV>>, IPersistentMap<TK, TV>
     {
         private readonly clojure.lang.IPersistentMap _clojureMap;
 
@@ -35,15 +37,10 @@ namespace ClojureCollectionsCLR
             return new PersistentHashMap<TK, TV>((clojure.lang.IPersistentMap)_clojureMap.empty());
         }
 
+        [Obsolete("Use regular equals instead.")]
         public bool Equiv(IPersistentMap<TK, TV> map)
         {
-            if (map == null)
-                return false;
-
-            var cMap = map as PersistentHashMap<TK, TV>;
-            if (cMap == null)
-                return false;
-            return _clojureMap.equiv(cMap._clojureMap);
+            return Equals(map);
         }
 
         public bool ContainsKey(TK key)
@@ -137,19 +134,6 @@ namespace ClojureCollectionsCLR
             {
                 _enumerator.Reset();
             }
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is IPersistentMap<TK, TV>)
-                return Equiv(obj as IPersistentMap<TK, TV>);
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return _clojureMap.GetHashCode();
         }
 
         public override string ToString()

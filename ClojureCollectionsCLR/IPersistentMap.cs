@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ClojureCollectionsCLR
 {
@@ -38,6 +39,7 @@ namespace ClojureCollectionsCLR
         /// 
         /// <param name="map"> The other map to compare with.</param>
         /// <returns> True if the two vectors are equivalent, False otherwise.</returns>
+        [Obsolete("Use regular equals instead.")]
         bool Equiv(IPersistentMap<TK, TV> map);
 
         /// <summary>

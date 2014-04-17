@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ClojureCollectionsCLR
 {
@@ -33,6 +34,7 @@ namespace ClojureCollectionsCLR
         /// </summary>
         /// <param name="list">The other list to compare with.</param>
         /// <returns>True if the two lists are equivalent, False otherwise.</returns>
+        [Obsolete("Use regular equals instead.")]
         bool Equiv(IPersistentList<T> list);
 
         /// <summary>

@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace ClojureCollectionsCLR
 {
-    public class PersistentList<T> : IPersistentList<T>
+    [Serializable]
+    public class PersistentList<T> : ImmutableObject<PersistentList<T>>, IPersistentList<T>
     {
 
         private readonly clojure.lang.IPersistentList _clojureList;
@@ -37,13 +38,10 @@ namespace ClojureCollectionsCLR
             return new PersistentList<T>((clojure.lang.IPersistentList)_clojureList.empty());
         }
 
+        [Obsolete("Use regular equals instead.")]
         public bool Equiv(IPersistentList<T> list)
         {
-            var cList = list as PersistentList<T>;
-            if (cList == null)
-                return false;
-
-            return _clojureList.equiv(cList._clojureList);
+            return Equals(list);
         }
 
         public T Peek()
@@ -76,19 +74,6 @@ namespace ClojureCollectionsCLR
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is IPersistentList<T>)
-                return Equiv(obj as IPersistentList<T>);
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return _clojureList.GetHashCode();
         }
 
         public override string ToString()

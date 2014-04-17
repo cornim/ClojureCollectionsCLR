@@ -83,14 +83,15 @@ namespace ClojureCollectionsCLRTest
             target2 = target2.Assoc("x", "y");
             target2 = target2.Assoc("z", "a");
 
-            Assert.IsTrue(target.Equiv(target2));
+            Assert.AreEqual(target, target2);
             Assert.AreEqual(target, target2);
             Assert.AreEqual(target.GetHashCode(), target2.GetHashCode());
 
             target2 = target2.Without("z");
             target2 = target2.Without("b");
 
-            Assert.IsFalse(target.Equiv(target2));
+            Assert.AreNotEqual(target, target2);
+            Assert.IsFalse(target == target2);
             Assert.AreNotEqual(target, target2);
         }
 

@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace ClojureCollectionsCLR
 {
-    public class PersistentVector<T> : IPersistentVector<T>
+    [Serializable]
+    public class PersistentVector<T> : ImmutableObject<PersistentVector<T>>, IPersistentVector<T>
     {
         private readonly clojure.lang.IPersistentVector _clojureVector;
 
@@ -31,13 +32,10 @@ namespace ClojureCollectionsCLR
             return new PersistentVector<T>((clojure.lang.IPersistentVector)_clojureVector.empty());
         }
 
+        [Obsolete("Use regular equals instead.")]
         public bool Equiv(IPersistentVector<T> vec)
         {
-            var cVec = vec as PersistentVector<T>;
-            if (cVec == null)
-                return false;
-
-            return _clojureVector.equiv(cVec._clojureVector);
+            return Equals(vec);
         }
 
         public T Peek()
@@ -120,19 +118,6 @@ namespace ClojureCollectionsCLR
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is IPersistentVector<T>)
-                return Equiv(obj as IPersistentVector<T>);
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return _clojureVector.GetHashCode();
         }
 
         public override string ToString()

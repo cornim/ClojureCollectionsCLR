@@ -51,7 +51,7 @@ namespace ClojureCollectionsCLRTest
             IPersistentVector<int> target2 = new PersistentVector<int>(new[] { 3, 56, 55, 8 });
             IPersistentVector<int> target3 = new PersistentVector<int>(new[] { 3, 56, 55, 8 });
 
-            Assert.IsTrue(target2.Equiv(target3));
+            Assert.AreEqual(target2, target3);
             Assert.AreEqual(target2, target3);
             Assert.AreEqual(target2.GetHashCode(), target3.GetHashCode());
 

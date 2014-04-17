@@ -26,9 +26,9 @@ namespace ClojureCollectionsCLRTest
 
             var init = new List<int> { 5, 1 };
 
-            var target2 = new PersistentList<int>(init);
+            IPersistentList<int> target2 = new PersistentList<int>(init);
 
-            Assert.IsTrue(target.Equiv(target2));
+            Assert.AreEqual(target, target2);
             Assert.AreEqual(target, target2);
             Assert.AreEqual(target.GetHashCode(), target2.GetHashCode());
             Assert.AreNotSame(target, target2);

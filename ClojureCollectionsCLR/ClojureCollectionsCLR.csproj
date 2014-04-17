@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImmutableObject.cs" />
     <Compile Include="IPersistentList.cs" />
     <Compile Include="IPersistentMap.cs" />
     <Compile Include="IPersistentVector.cs" />
